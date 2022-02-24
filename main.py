@@ -7,7 +7,6 @@ INTEGER, PLUS, EOF, MINUS, SPACE, TIMES, DIVIDE = 'INTEGER', 'PLUS', 'EOF', 'MIN
 
 class Token(object):
     def __init__(self, type, value):
-        # token type: INTEGER, PLUS, or EOF
         self.type = type
         # token value: 0, 1, 2. 3, 4, 5, 6, 7, 8, 9, '+', or None
         self.value = value
@@ -36,7 +35,7 @@ class Interpreter(object):
             self.eat(INTEGER)
         return num
     def __init__(self, text):
-        # client string input, e.g. "3+5"
+        # client string input, e.g. "3  + 5"
         self.text = text
         # self.pos is an index into self.text
         self.pos = 0
