@@ -1,7 +1,7 @@
 # M-Interpreter
 Use 
 ```
-bash setup.sh
+python3 main.py filename.m
 ```
-to setup on your system.
+to run a M program.
 ###### Note: You need python3 installed.
