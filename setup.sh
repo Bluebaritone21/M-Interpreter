@@ -1,2 +1,2 @@
-wd = pwd
-cat pwd /main.py | alias m=
+$wd = pwd
+alias m=$wd/main.py
