@@ -47,6 +47,7 @@ class Lexer(object):
     RESERVED_KEYWORDS = {
         'BEGIN': Token('BEGIN', 'BEGIN'),
         'END': Token('END', 'END'),
+        'is': Token('ASSIGN','is'),
     }
 
     def _id(self):
@@ -129,12 +130,7 @@ class Lexer(object):
 
             if self.current_char.isalpha():
                 return self._id()
-
-            if self.current_char == ':' and self.peek() == '=':
-                self.advance()
-                self.advance()
-                return Token(ASSIGN, ':=')
-
+            
             if self.current_char == ';':
                 self.advance()
                 return Token(SEMI, ';')
@@ -215,7 +211,7 @@ class Parser(object):
     def program(self):
         """program : compound_statement DOT"""
         node = self.compound_statement()
-        self.eat(DOT)
+        self.eat(SEMI)
         return node
 
     def compound_statement(self):
