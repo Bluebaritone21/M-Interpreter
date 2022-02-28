@@ -10,8 +10,8 @@
 #
 # EOF (end-of-file) token is used to indicate that
 # there is no more input left for lexical analysis
-INTEGER, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, EOF, BEGIN, END, DOT, ASSIGN, SEMI, ID= (
-    'INTEGER', 'PLUS', 'MINUS', 'MUL', 'DIV', '(', ')', 'EOF','BEGIN','END','DOT','ASSIGN','SEMI', 'ID'
+INTEGER_CONST, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, EOF, BEGIN, END, DOT, ASSIGN, SEMI, ID= (
+    'INTEGERCONST', 'PLUS', 'MINUS', 'MUL', 'DIV', '(', ')', 'EOF','BEGIN','END','DOT','ASSIGN','SEMI', 'ID'
 )
 
 
@@ -101,7 +101,7 @@ class Lexer(object):
                 continue
 
             if self.current_char.isdigit():
-                return Token(INTEGER, self.integer())
+                return Token(INTEGER_CONST, self.integer())
 
             if self.current_char == '+':
                 self.advance()
@@ -297,8 +297,8 @@ class Parser(object):
             self.eat(MINUS)
             node = UnaryOp(token, self.factor())
             return node
-        elif token.type == INTEGER:
-            self.eat(INTEGER)
+        elif token.type == INTEGER_CONST:
+            self.eat(INTEGER_CONST)
             return Num(token)
         elif token.type == LPAREN:
             self.eat(LPAREN)
