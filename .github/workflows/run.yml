@@ -1,7 +1,8 @@
-name: GitHub Actions Demo
+name: Run Code
 on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - run: ls
       - run: python3 main.py program.m
