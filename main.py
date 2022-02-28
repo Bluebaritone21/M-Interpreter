@@ -209,9 +209,10 @@ class Parser(object):
         else:
             self.error()
     def program(self):
-        """program : compound_statement DOT"""
+        """
+        program : compound_statement
+        """
         node = self.compound_statement()
-        self.eat(SEMI)
         return node
 
     def compound_statement(self):

@@ -1,3 +1,3 @@
 BEGIN
-     test := stuff;
-END.
+     test is stuff;
+END
