@@ -2,7 +2,7 @@
 
 Use `python3 main.py filename.m` to run a M program.
 
-You Might want to run:
+You Might want to run (in the same Directory as the repo.):
 
 ```bash
 mkdir ~/Mlang
