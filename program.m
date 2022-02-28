@@ -1,0 +1,3 @@
+BEGIN
+     test := stuff;
+END.
