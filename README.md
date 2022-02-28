@@ -7,6 +7,6 @@ You Might want to run (in the same Directory as the repo.):
 ```bash
 mkdir ~/Mlang
 mv ./main.py ~/Mlang/main.py
-echo -e "\nalias m=\"python3 ~/Mlang/main.m\"" >> ~/.bashrc
+echo -e "\nalias m=\"python3 ~/Mlang/main.py\"" >> ~/.bashrc
 source ~/.bashrc
 ```
