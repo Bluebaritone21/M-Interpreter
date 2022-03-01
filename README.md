@@ -10,7 +10,9 @@ mv ./main.py ~/Mlang/main.py
 echo -e "\nalias m=\"python3 ~/Mlang/main.py\"" >> ~/.bashrc
 source ~/.bashrc
 ```
+
 ---
+
 ## Syntax
 
 Programs start with `{` and end with `}`
