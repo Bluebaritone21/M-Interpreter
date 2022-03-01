@@ -10,8 +10,8 @@
 #
 # EOF (end-of-file) token is used to indicate that
 # there is no more input left for lexical analysis
-INTEGER_CONST, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, EOF, BEGIN, END, DOT, ASSIGN, SEMI, ID, INTEGER, VAR, COLON, COMA, REAL, REAL_CONST (
-'INTEGERCONST', 'PLUS', 'MINUS', 'MUL', 'DIV', '(', ')', 'EOF','BEGIN','END','DOT','ASSIGN','SEMI', 'ID','ITERGER', 'VAR', 'COLON', 'COMA', 'REAL', 'REALCONST'
+INTEGER_CONST, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, EOF, BEGIN, END, DOT, ASSIGN, SEMI, ID, INTEGER, VAR, COLON, COMA, REAL, REAL_CONST, INTEGER_DIV, FLOAT_DIV (
+'INTEGERCONST', 'PLUS', 'MINUS', 'MUL', 'DIV', '(', ')', 'EOF','BEGIN','END','DOT','ASSIGN','SEMI', 'ID','ITERGER', 'VAR', 'COLON', 'COMA', 'REAL', 'REALCONST', 'INTEGER_DIV', 'FLOAT_DIV'
 )
 
 
@@ -38,9 +38,14 @@ class Lexer(object):
         self.pos = 0
         self.current_char = self.text[self.pos]
     RESERVED_KEYWORDS = {
+        'PROGRAM': Token('PROGRAM', 'PROGRAM'),
+        'VAR': Token('VAR', 'VAR'),
+        'DIV': Token('INTEGER_DIV', 'DIV'),
+        'INTEGER': Token('INTEGER', 'INTEGER'),
+        'REAL': Token('REAL', 'REAL'),
         'BEGIN': Token('BEGIN', 'BEGIN'),
         'END': Token('END', 'END'),
-        'VAR': Token('VAR', 'VAR'),
+   
     }
 
     def _id(self):
@@ -49,9 +54,12 @@ class Lexer(object):
         while self.current_char is not None and self.current_char.isalnum():
             result += self.current_char
             self.advance()
-
         token = self.RESERVED_KEYWORDS.get(result, Token(ID, result))
         return token
+    def skip_comment(self):
+        while self.current_char != '}':
+            self.advance()
+        self.advance()  # the closing curly brace    
     def error(self):
         raise Exception('Invalid character')
 
@@ -74,14 +82,26 @@ class Lexer(object):
         while self.current_char is not None and self.current_char.isspace():
             self.advance()
 
-    def integer(self):
-        """Return a (multidigit) integer consumed from the input."""
+    def number(self):
+        """Return a (multidigit) number consumed from the input."""
         result = ''
         while self.current_char is not None and self.current_char.isdigit():
             result += self.current_char
             self.advance()
         return int(result)
-
+        if self.current_char == '.':
+            result += self.current_char
+            self.advance()
+            while (
+                self.current_char is not None and 
+                self.current_char.isdigit()
+            ):
+                result += self.current_char
+                self.advance()
+            token = Token('REAL_CONST', float(result))
+        else:
+            token('INTEGER_CONST', int(result))
+        return token
     def get_next_token(self):
         """Lexical analyzer (also known as scanner or tokenizer)
 
@@ -95,7 +115,7 @@ class Lexer(object):
                 continue
 
             if self.current_char.isdigit():
-                return Token(INTEGER_CONST, self.integer())
+                return Token(INTEGER_CONST, self.number())
 
             if self.current_char == '+':
                 self.advance()
