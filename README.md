@@ -19,4 +19,3 @@ Programs start with `{` and end with `}`
 Assign variables with `is` as in `SomeVar is 5;`
 
 Satements end in `;`
-
