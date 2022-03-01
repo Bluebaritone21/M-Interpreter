@@ -10,8 +10,8 @@
 #
 # EOF (end-of-file) token is used to indicate that
 # there is no more input left for lexical analysis
-INTEGER_CONST, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, EOF, BEGIN, END, DOT, ASSIGN, SEMI, ID= (
-    'INTEGERCONST', 'PLUS', 'MINUS', 'MUL', 'DIV', '(', ')', 'EOF','BEGIN','END','DOT','ASSIGN','SEMI', 'ID'
+INTEGER_CONST, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, EOF, BEGIN, END, DOT, ASSIGN, SEMI, ID, INTEGER, VAR= (
+    'INTEGERCONST', 'PLUS', 'MINUS', 'MUL', 'DIV', '(', ')', 'EOF','BEGIN','END','DOT','ASSIGN','SEMI', 'ID','ITERGER_CONST', 'VAR'
 )
 
 
@@ -21,13 +21,6 @@ class Token(object):
         self.value = value
 
     def __str__(self):
-        """String representation of the class instance.
-
-        Examples:
-            Token(INTEGER, 3)
-            Token(PLUS, '+')
-            Token(MUL, '*')
-        """
         return 'Token({type}, {value})'.format(
             type=self.type,
             value=repr(self.value)
@@ -47,6 +40,7 @@ class Lexer(object):
     RESERVED_KEYWORDS = {
         'BEGIN': Token('BEGIN', 'BEGIN'),
         'END': Token('END', 'END'),
+        'VAR': Token('VAR', 'VAR'),
     }
 
     def _id(self):
