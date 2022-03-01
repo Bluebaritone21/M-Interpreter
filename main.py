@@ -132,9 +132,12 @@ class Lexer(object):
             if self.current_char.isspace():
                 self.skip_whitespace()
                 continue
-
+            if self.current_char == '{':
+                self.advance()
+                self.skip_comment()
+                continue
             if self.current_char.isdigit():
-                return Token(INTEGER_CONST, self.number())
+                return self.number()
 
             if self.current_char == '+':
                 self.advance()
@@ -150,7 +153,7 @@ class Lexer(object):
 
             if self.current_char == '/':
                 self.advance()
-                return Token(DIV, '/')
+                return Token(FLOAT_DIV, '/')
 
             if self.current_char == '(':
                 self.advance()
@@ -175,6 +178,12 @@ class Lexer(object):
             if self.current_char == '.':
                 self.advance()
                 return Token(DOT, '.')
+            if self.current_char == ':':
+                self.advance()
+                return Token(COLON, ':')
+            if self.current_char == ',':
+                self.advance()
+                return(COMMA,',')
 
             self.error()
 
@@ -190,6 +199,17 @@ class Lexer(object):
 class AST(object):
     pass
 
+class Program(AST):
+    def __init__(self, name, block):
+        self.name = name
+        self.block = block
+
+class Block(AST):
+    def __init__(self, declarations, compound_statement):
+        self.declarations = declarations
+        self.compound_statement = compound_statement
+class VarDecl(AST):
+    def __init__()
 class NoOp(AST):
     pass
 
