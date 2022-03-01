@@ -1,4 +1,4 @@
 BEGIN
      test is 5;
-     test1 is test +6/(2*3) +     7;
+     test1 is test +1;
 END
