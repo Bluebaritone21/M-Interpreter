@@ -325,15 +325,15 @@ class Parser(object):
         else:
             self.error()
     def program(self):
-    """program : PROGRAM variable SEMI block DOT"""
-    self.eat(PROGRAM)
-    var_node = self.variable()
-    prog_name = var_node.value
-    self.eat(SEMI)
-    block_node = self.block()
-    program_node = Program(prog_name, block_node)
-    self.eat(DOT)
-    return program_node
+        """program : PROGRAM variable SEMI block DOT"""
+        self.eat(PROGRAM)
+        var_node = self.variable()
+        prog_name = var_node.value
+        self.eat(SEMI)
+        block_node = self.block()
+        program_node = Program(prog_name, block_node)
+        self.eat(DOT)
+        return program_node
 
 
     def compound_statement(self):
