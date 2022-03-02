@@ -1,4 +1,4 @@
 BEGIN
      test is 5;
-     test1 is test +1;
+     test1 is test +5*5;
 END
