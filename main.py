@@ -214,7 +214,7 @@ class VarDecl(AST):
         self.var_node = var_node
         self.type_node = type_node
 
-class Type(token):
+class Type(AST):
     def __init__(self, token):
         self.token = token
         self.value = token.value
